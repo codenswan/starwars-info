@@ -1,0 +1,7 @@
+.filmsDashboard{
+    display: flex;
+    flex-direction: column;
+    background: rba(0,0,0,0.3);
+    color: white;
+    gap: 8px;
+}

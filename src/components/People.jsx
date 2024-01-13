@@ -10,13 +10,8 @@ export default function People(props) {
     return <div>Loading...</div>; // or some other fallback UI
   }
   
-  const names = data.results.map((item) => {
-    if(!item || !item.name) {
-      throw new Error('Invalid item in results');
-    }
-    return item.name;
-  });
-    console.log('these are the names:', names);
+  const names = data.results.map((item) => item.name);
+  console.log('these are the names:', names);
   
   return (
     <div >
