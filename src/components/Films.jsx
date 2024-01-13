@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './dashboard.module.css';
 
 export default function Films(props) {
-    const { data } = props
+    const {data} = props
     console.log('this is the films data: ', data)
 
     if (!data || !data.result) {
@@ -18,21 +18,36 @@ export default function Films(props) {
 
     return (
         <div className={styles.filmsDasboard}>
-          {films.map((film, index) => {
-              const keys = Object.keys(film).filter(key => {
-                  if (['created', 'edited'].includes(key)) return false;
-                  if (Array.isArray(film[key])) return false;
-  
+            {films.map((film, index) => {
+              const headers = Object.keys(film).filter(header => {
+                  if (['created', 'edited', 'url']
+                      .includes(header)) return false;
+                  if (Array.isArray(film[header])) return false;
                   return true;
-              });
-          
+              })
+
             return (
               <div key={index}>
-                <h2>{film.title}</h2>
-                {keys.map(header => {
-                  return (
+                    <h2>{film.title}</h2>
+                    
+                    {headers.map(header => {
+                       // Format header to uppercase and make other changes
+                        let formattedHeader = header
+                            .replace('_', ' ')
+                            .replace(/\b\w/g, firstChar => firstChar.toUpperCase());
+                  // Remove 'Id' from 'EpisodeId' header
+            if (formattedHeader === 'Episode Id') {
+              formattedHeader = 'Episode'; 
+            }
+            if (formattedHeader === 'Opening Crawl') {
+              formattedHeader = 'Description';
+            }
+                        
+                        return (
                     <div key={header}>
-                      <p>{header}: {film[header]}</p>
+                          <p>{formattedHeader}: {film[header]
+                          }
+                          </p>
                     </div>
                   )
                 })}
