@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 // import styles from './people.module.css'
 
@@ -12,7 +13,7 @@ export default function People(props) {
   
   const names = data.results.map((item) => item.name);
   console.log('these are the names:', names);
-  
+
   return (
     <div >
       {names.map((name, index) => {
@@ -25,3 +26,16 @@ export default function People(props) {
     </div>
     )
 }
+
+People.propTypes = {
+  data: PropTypes.shape({
+    results: PropTypes.arrayOf(
+      PropTypes.shape({
+        properties: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+          // Add other properties if needed
+        }).isRequired,
+      })
+    ),
+  }),
+};
