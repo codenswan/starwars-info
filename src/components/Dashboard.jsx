@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import styles from './dashboard.module.css';
 import useFetchData from '../hooks/useFetchData';
 import Options from './Options';
 import People from './People'
 import Films from './Films'
+import Species from './Species'
 
 export default function Dashboard() {
   const [selection, setSelection] = useState(false);
@@ -18,9 +20,9 @@ export default function Dashboard() {
 
   const dataRender = {
     
-    people: <People data={data} />,
-    films: <Films data={data} />,
-    // species: <Species data={data} />,
+    People: <People data={data} />,
+    Films: <Films data={data} />,
+    Species: <Species data={data} />,
   };
 
   return (
